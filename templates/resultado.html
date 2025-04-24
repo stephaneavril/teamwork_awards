@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado de Evaluación</title>
+</head>
+<body>
+    <h1>Resultado del Reto Teamwork</h1>
+    <p><strong>Integrante 1:</strong> {{ nombre1 }}</p>
+    <p><strong>Integrante 2:</strong> {{ nombre2 }}</p>
+    <p><strong>Puntuación:</strong> {{ puntuacion }}</p>
+    <p><strong>Justificación:</strong> {{ justificacion }}</p>
+
+    <h3>Video</h3>
+    <video width="640" controls>
+        <source src="{{ url_for('static', filename=video.split('static/')[-1].replace('\\', '/')) }}" type="video/mp4">
+        Tu navegador no soporta este formato.
+    </video>
+
+    <p><a href="{{ url_for('index') }}">Volver al inicio</a></p>
+</body>
+</html>

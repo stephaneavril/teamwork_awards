@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Resultados Teamwork Awards</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: #1c1c1c;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: gold;
+            margin-bottom: 2rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #2a2a2a;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid #444;
+            text-align: center;
+        }
+
+        th {
+            background: #444;
+            color: gold;
+        }
+
+        video {
+            max-width: 200px;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .justificacion {
+            text-align: left;
+        }
+
+        @media screen and (max-width: 768px) {
+            th, td {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+
+            video {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🌟 Teamwork Awards - Resultados</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre 1</th>
+                    <th>Nombre 2</th>
+                    <th>Video</th>
+                    <th>Puntuación</th>
+                    <th>Justificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in resultados %}
+                <tr>
+                    <td>{{ r.nombre1 }}</td>
+                    <td>{{ r.nombre2 }}</td>
+                    <td>
+                        <video controls>
+                            <source src="{{ url_for('static', filename=r.video.split('static/')[-1]) }}">
+                            Tu navegador no soporta video.
+                        </video>
+                    </td>
+                    <td><strong>{{ r.puntuacion }}</strong></td>
+                    <td class="justificacion">{{ r.justificacion }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
