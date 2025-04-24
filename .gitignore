@@ -1,0 +1,4 @@
+echo "teamwork_results.json" >> .gitignore
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
+echo "static/videos_teamwork/" >> .gitignore

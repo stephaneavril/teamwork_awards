@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: teamwork-awards
+    env: python
+    buildCommand: ""
+    startCommand: python judgeai.py
