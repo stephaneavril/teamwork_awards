@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Votación Teamwork Awards</title>
+  <style>
+    body { font-family: sans-serif; background: #111; color: #fff; text-align: center; padding: 20px; }
+    h1 { color: gold; }
+    form { max-width: 600px; margin: auto; }
+    input[type="email"] { width: 100%; padding: 10px; margin-bottom: 20px; }
+    .video-card { background: #222; padding: 15px; margin: 10px 0; border-radius: 10px; }
+    video { width: 100%; max-height: 240px; }
+    button { background: gold; color: black; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h1>Votación Teamwork Awards</h1>
+  <form method="POST">
+    <label>Correo electrónico:</label><br>
+    <input type="email" name="email" required><br>
+
+    {% for video in videos %}
+      <div class="video-card">
+        <h3>{{ video.nombre1 }} y {{ video.nombre2 }}</h3>
+        <video controls src="/{{ video.video }}"></video><br><br>
+        <label>
+          <input type="checkbox" name="voto" value="{{ video.id }}"> Votar por este equipo
+        </label>
+      </div>
+    {% endfor %}
+
+    <p><strong>Reparte tus 3 votos como quieras entre los videos. Máximo 1 voto por video.</strong></p>
+    <button type="submit">Enviar Votos</button>
+  </form>
+</body>
+</html>

@@ -5,13 +5,14 @@
     <title>Subir Video para Evaluación</title>
 </head>
 <body>
-    <h1>Sube el video de la pareja para evaluación AI</h1>
+    <h1>Sube el video de la pareja participante</h1>
     <form method="POST" action="/evaluar" enctype="multipart/form-data">
         Nombre 1: <input type="text" name="nombre1" required><br>
         Nombre 2: <input type="text" name="nombre2" required><br>
         Video: <input type="file" name="video" accept="video/*" required><br>
-        <button type="submit">Subir y Evaluar</button>
+        <button type="submit">Subir Video</button>
     </form>
+    
     <a href="/teamwork_awards">Ver Evaluaciones (Estilo Oscar)</a>
 
     <form action="/limpiar_todo" method="post" onsubmit="return confirm('¿Estás seguro que quieres borrar todo?');">

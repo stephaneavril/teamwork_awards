@@ -1,100 +1,58 @@
+<!-- templates/teamwork_awards.html -->
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏆 Resultados Teamwork Awards</title>
+    <title>Votación Teamwork Awards</title>
     <style>
-        body {
-            font-family: 'Georgia', serif;
-            background: #1c1c1c;
-            color: #f5f5f5;
-            margin: 0;
-            padding: 2rem;
-        }
-
-        h1 {
-            text-align: center;
-            color: gold;
-            margin-bottom: 2rem;
-        }
-
-        .table-container {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #2a2a2a;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 1rem;
-            border-bottom: 1px solid #444;
-            text-align: center;
-        }
-
-        th {
-            background: #444;
-            color: gold;
-        }
-
         video {
-            max-width: 200px;
-            height: auto;
-            border: 2px solid #ccc;
+            width: 100%;
+            max-width: 500px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .tarjeta {
+            border: 1px solid #ddd;
             border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
-        .justificacion {
-            text-align: left;
+        body {
+            font-family: sans-serif;
+            padding: 20px;
         }
-
-        @media screen and (max-width: 768px) {
-            th, td {
-                font-size: 0.9rem;
-                padding: 0.5rem;
-            }
-
-            video {
-                max-width: 100%;
-            }
+        .centrado {
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>🌟 Teamwork Awards - Resultados</h1>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre 1</th>
-                    <th>Nombre 2</th>
-                    <th>Video</th>
-                    <th>Puntuación</th>
-                    <th>Justificación</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for r in resultados %}
-                <tr>
-                    <td>{{ r.nombre1 }}</td>
-                    <td>{{ r.nombre2 }}</td>
-                    <td>
-                        <video controls>
-                            <source src="{{ url_for('static', filename=r.video.split('static/')[-1]) }}">
-                            Tu navegador no soporta video.
-                        </video>
-                    </td>
-                    <td><strong>{{ r.puntuacion }}</strong></td>
-                    <td class="justificacion">{{ r.justificacion }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h1 class="centrado">🎬 Votación Teamwork Awards</h1>
+    <p>Asigna tus 3 puntos como mejor consideres (puedes darlos a uno o distribuirlos entre 3 equipos).</p>
+
+    <form method="POST" action="/votar">
+        <label>Tu correo (será usado para validar que no votes dos veces):</label><br>
+        <input type="email" name="email" required><br><br>
+
+        {% for i, r in enumerate(resultados) %}
+        <div class="tarjeta">
+            <strong>Equipo {{ i + 1 }}: {{ r.nombre1 }} y {{ r.nombre2 }}</strong><br>
+            <video controls>
+                <source src="{{ r.video }}" type="video/mp4">
+                Tu navegador no soporta el video.
+            </video>
+            <label>Puntos para este equipo:</label>
+            <select name="voto">
+                <option value="">Sin votar</option>
+                <option value="{{ r.id }}">1 punto</option>
+            </select>
+        </div>
+        {% endfor %}
+
+        <button type="submit" style="padding:10px 20px;">Enviar Voto</button>
+    </form>
+
+    <br>
+    <a href="/resultados_votacion">Ver Resultados</a>
 </body>
 </html>
