@@ -4,30 +4,58 @@
 <head>
     <title>Votación Teamwork Awards</title>
     <style>
+        body {
+            background: #111;
+            color: gold;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            padding: 40px;
+        }
+        h1 {
+            font-size: 2.4em;
+            margin-bottom: 30px;
+        }
+        .tarjeta {
+            background: #222;
+            border: 1px solid gold;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 10px gold;
+        }
+        label, select, input {
+            font-family: 'Georgia', serif;
+        }
+        input[type="email"], select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            background: #1a1a1a;
+            color: gold;
+            margin: 10px 0;
+            width: 80%;
+        }
+        button {
+            background: gold;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
         video {
             width: 100%;
             max-width: 500px;
-            display: block;
-            margin-bottom: 10px;
+            margin: 10px 0;
         }
-        .tarjeta {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        body {
-            font-family: sans-serif;
-            padding: 20px;
-        }
-        .centrado {
-            text-align: center;
+        a {
+            color: violet;
         }
     </style>
 </head>
 <body>
-    <h1 class="centrado">🎬 Votación Teamwork Awards</h1>
+    <h1>🎬 Votación Teamwork Awards</h1>
     <p>Asigna tus 3 puntos como mejor consideres (puedes darlos a uno o distribuirlos entre 3 equipos).</p>
 
     <form method="POST" action="/votar">
@@ -47,12 +75,12 @@
                 <option value="1">1 punto</option>
                 <option value="2">2 puntos</option>
                 <option value="3">3 puntos</option>
-              </select>              
+            </select>              
             <input type="hidden" name="id_{{ loop.index0 }}" value="{{ r.id }}">
         </div>
         {% endfor %}
 
-        <button type="submit" style="padding:10px 20px;">Enviar Voto</button>
+        <button type="submit">Enviar Voto</button>
     </form>
 
     <br>
