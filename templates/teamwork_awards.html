@@ -43,9 +43,11 @@
             </video>
             <label>Puntos para este equipo:</label>
             <select name="puntos_{{ loop.index0 }}">
-                <option value="0">Sin votar</option>
+                <option value="0">0 puntos</option>
                 <option value="1">1 punto</option>
-            </select>
+                <option value="2">2 puntos</option>
+                <option value="3">3 puntos</option>
+              </select>              
             <input type="hidden" name="id_{{ loop.index0 }}" value="{{ r.id }}">
         </div>
         {% endfor %}
