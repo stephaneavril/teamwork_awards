@@ -1,50 +1,77 @@
+<!-- templates/resultados_votacion.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Resultados de Votación</title>
+    <title>Resultados - Teamwork Awards</title>
     <style>
         body {
-            font-family: sans-serif;
-            padding: 20px;
-            background: #f4f4f4;
-        }
-        .equipo {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            padding: 15px;
-        }
-        video {
-            width: 100%;
-            max-width: 500px;
-            display: block;
-            margin-bottom: 10px;
-        }
-        h1 {
+            background: #000;
+            color: gold;
+            font-family: 'Georgia', serif;
+            padding: 40px;
             text-align: center;
         }
-        .puntos {
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+        }
+        .ganador {
+            background: linear-gradient(to right, gold, orange);
+            color: black;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px gold;
+        }
+        .ranking {
+            margin-top: 30px;
+        }
+        .ranking div {
+            background: rgba(255, 215, 0, 0.1);
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 600px;
             font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
+        }
+        video {
+            max-width: 400px;
+            margin-top: 10px;
+        }
+        a {
+            color: white;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>🏆 Resultados de Votación</h1>
+    <h1>🏆 Resultados Finales - Teamwork Awards</h1>
 
-    {% for r in resultados %}
-    <div class="equipo">
-        <h3>🎥 {{ r.nombre1 }} & {{ r.nombre2 }}</h3>
+    {% if resultados %}
+    <div class="ganador">
+        <h2>🥇 Primer Lugar:</h2>
+        <p><strong>{{ resultados[0].nombre1 }} y {{ resultados[0].nombre2 }}</strong></p>
+        <p>{{ resultados[0].puntos }} puntos</p>
         <video controls>
-            <source src="{{ r.video }}" type="video/mp4">
-            Tu navegador no soporta este video.
+            <source src="{{ resultados[0].video }}" type="video/mp4">
+            Tu navegador no soporta video.
         </video>
-        <p class="puntos">⭐ Puntos: {{ r.puntos }} | 🗳️ Votos: {{ r.votos }}</p>
     </div>
-    {% endfor %}
 
-    <a href="/" style="display: block; text-align: center;">⬅ Volver</a>
+    <h2>🎖️ Ranking completo</h2>
+    <div class="ranking">
+        {% for r in resultados %}
+        <div>
+            <strong>{{ loop.index }}. {{ r.nombre1 }} y {{ r.nombre2 }}</strong><br>
+            {{ r.puntos }} puntos - {{ r.votos }} votos
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No hay resultados disponibles aún.</p>
+    {% endif %}
+
+    <br>
+    <a href="/">🔙 Volver al inicio</a>
 </body>
 </html>

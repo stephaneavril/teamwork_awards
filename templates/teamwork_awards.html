@@ -34,18 +34,19 @@
         <label>Tu correo (será usado para validar que no votes dos veces):</label><br>
         <input type="email" name="email" required><br><br>
 
-        {% for i, r in enumerate(resultados) %}
+        {% for r in resultados %}
         <div class="tarjeta">
-            <strong>Equipo {{ i + 1 }}: {{ r.nombre1 }} y {{ r.nombre2 }}</strong><br>
+            <strong>Equipo {{ loop.index }}: {{ r.nombre1 }} y {{ r.nombre2 }}</strong><br>
             <video controls>
                 <source src="{{ r.video }}" type="video/mp4">
                 Tu navegador no soporta el video.
             </video>
             <label>Puntos para este equipo:</label>
-            <select name="voto">
-                <option value="">Sin votar</option>
-                <option value="{{ r.id }}">1 punto</option>
+            <select name="puntos_{{ loop.index0 }}">
+                <option value="0">Sin votar</option>
+                <option value="1">1 punto</option>
             </select>
+            <input type="hidden" name="id_{{ loop.index0 }}" value="{{ r.id }}">
         </div>
         {% endfor %}
 
