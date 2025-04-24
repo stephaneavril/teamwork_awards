@@ -33,6 +33,19 @@ def guardar_resultado(datos):
     with open(RESULTS_FILE, 'w', encoding='utf-8') as f:
         json.dump(resultados, f, indent=2, ensure_ascii=False)
 
+@app.route('/limpiar_todo', methods=['POST'])
+def limpiar_todo():
+    # Limpia el archivo JSON
+    with open(RESULTS_FILE, 'w', encoding='utf-8') as f:
+        json.dump([], f)
+
+    # Borra videos de prueba
+    for archivo in os.listdir(UPLOAD_FOLDER):
+        if archivo.endswith(('.mp4', '.mov', '.avi', '.webm')):
+            os.remove(os.path.join(UPLOAD_FOLDER, archivo))
+
+    return "Sistema limpiado correctamente"
+
 @app.route('/')
 def index():
     return render_template('index.html')
